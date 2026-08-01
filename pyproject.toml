@@ -1,0 +1,38 @@
+[project]
+name = "nerveml"
+version = "0.1.0"
+description = "Neural data privacy and validation scanner (prototype)"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "scikit-learn>=1.3",
+    "matplotlib>=3.7",
+    "streamlit>=1.30",
+    "reportlab>=4.0",
+]
+
+[project.optional-dependencies]
+# Cross-dataset audit inputs via MOABB (agreement-free public EEG datasets).
+# Optional: nerveml.moabb_loader imports it lazily, only when actually used.
+moabb = ["moabb>=1.0", "mne>=1.6"]
+
+[project.scripts]
+nerveml = "nerveml.cli:main"
+nerveml-compare = "nerveml.compare_cli:main"
+nerveml-decode = "nerveml.decode_cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["nerveml*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q -m 'not slow'"
+markers = [
+    "slow: marks tests that download real data from the network (skip with default run; select with -m slow)",
+]

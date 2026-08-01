@@ -1,0 +1,22 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+
+# Scan artifacts are reproducible; keep the directory, not the contents.
+outputs/*
+!outputs/.gitkeep
+
+# Sparkline rasters are rebuilt with every report.
+**/.sparklines/
+
+
+# Real EEG datasets are large and license-restricted. Never commit them.
+sample_data/*
+!sample_data/.gitkeep
+
+# autonomous loop
+.loop/loop.log
+.venv/
